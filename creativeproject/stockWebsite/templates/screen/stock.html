@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Information for {{ticker.upper()}}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+{% if row_data_stock is defined and row_data_stock[0] is defined %}
+    <div class='inline'>   
+    <form action="{{url_for('profile.addintermediate')}}" method='POST'>
+        <input type="hidden" name='ticker' value='{{ticker.upper()}}'>
+        <input type="hidden" name='token' value={{g.token}}>
+        <button type='submit'>Add to Watchlist</button>
+    </form>
+    <form action="{{ url_for('graph.dailygraph') }}" method='POST' target='blank'>
+        <input type="hidden" name='ticker' value={{ticker.upper()}}>
+        <button>Daily Graph</button>
+    </form>
+    <form action="{{ url_for('graph.weeklygraph') }}" method='POST' target='blank'>
+        <input type="hidden" name='ticker' value={{ticker.upper()}}>
+        <button>Weekly Graph</button>
+    </form>
+    </div>
+    <table> <!-- This template element is based on https://stackoverflow.com/a/56296451-->
+        
+        <tbody>
+            {% for row in row_data_stock %}
+            <tr>
+                {% for cell in row %}
+                    {% if '%' in cell and 'ivi' not in cell %}
+                        {% if '-' in cell %}
+                        <td class='cRed'>{{cell}}</td>
+                        {% else %}
+                        <td class='cGreen'>{{cell}}</td>
+                        {% endif %}
+                    {% else %}
+                    <td>{{cell}}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    
+    </table>
+    <form action="{{url_for('screen.download')}}" method='GET'>
+        <input type="hidden" name='ticker' value='{{ticker}}'>
+        <button type='submit'>Download Info</button>
+    </form><br>
+    <table>
+        <thead>
+            <tr>
+                {% for col in news_column_names %}
+                <th>{{col}}</th>
+                {% endfor %}
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in row_data_news %}
+            {% set outer_loop = loop %}
+            <tr>
+            {% for col, row_ in zip(news_column_names, row) %}
+                {% if col == link_column %}
+                <td>
+                    <a href="{{links[outer_loop.index-1]}}" target='blank' class='article_links'>
+                        {{ row_ }}
+                    </a>
+                </td>
+                {% else %}
+                    <td>{{row_}}</td>
+                {% endif %}
+            {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div><h2>Invalid Ticker</h2></div>
+    {% endif %}
+{% endblock %}

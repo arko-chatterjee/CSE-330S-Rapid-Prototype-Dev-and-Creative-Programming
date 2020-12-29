@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if lists|length > 0 %}
+    {% for listname in lists %}
+    <form action="{{url_for('profile.addtolist')}}" method='POST'>
+        <input type="hidden" name='token' value={{g.token}}>
+        <input type="hidden" name='ticker' value={{ticker}}>
+        <input type="hidden" name='listname' value={{listname}}>
+        <button type='submit'>Add to watchlist: <em>{{listname}}</em></button>
+    </form>
+    {% endfor %}
+    {% else %}
+    <div>No watchlists exist. Go to<a href="{{url_for('profile.profile')}}"> your profile</a> to make one</div>
+    {% endif %}
+{% endblock %}

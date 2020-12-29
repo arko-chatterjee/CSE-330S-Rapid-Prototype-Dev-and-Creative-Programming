@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Your Profile{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div>
+    <h3>Your Watchlists</h3>
+    <form method="post" action="{{url_for('profile.cList')}}">
+        <input type="hidden" value={{g.token}} name='token'>
+        <input type="text" placeholder='List Name' name='listname'>
+        <button type='submit'>Create new List</button>
+    </form>
+<div class='inline'>
+{% if list|length > 0 %}
+    {% for listname, listcontents in list.items() %}
+    <div>
+    <h4>List {{listname}}:</h4>
+    <div>
+        {% if listcontents|length > 0 %}
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Ticker
+                    </th>
+                    <th>
+                        Bookmarks
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for stockName, bookmarks in listcontents.items() %}
+            <tr>
+                <td>
+                    <a href="/{{stockName}}">{{stockName}}</a>
+                    <form action="{{url_for('profile.removefromlist')}}" method='POST' class='center smaller'>
+                        <button type='submit smaller' class='center'>x</button>
+                        <input type="hidden" name=token value={{g.token}}>
+                        <input type="hidden" name='ticker' value={{stockName}}>
+                        <input type="hidden" name='listname' value={{listname}}>
+                    </form>
+                </td>
+                <td>
+                    {% if bookmarks|length > 0 %}
+                    <form action="{{url_for('profile.delbookmark')}}" method='POST'>
+                        <select name="bookmarks"  class='bookmarks default'>
+                        {% for link in bookmarks %}
+                        <option value="{{link}}">[{{loop.index}}]</option>
+                        {% endfor %}
+                        </select>
+                        <input type="hidden" value={{g.token}} name='token'>
+                        <button class ='bm' type='button'>View Bookmark</button>
+                        <button type='submit'>Delete Bookmark</button>
+                        <input type="hidden" value={{listname}} name='listname'>
+                        <input type="hidden" name='ticker' value={{stockName}}>
+                    </form> 
+                    {% endif %}
+                    <form action="{{url_for('profile.addbookmark')}}" method='POST'>
+                        <button type='submit'>Add Bookmark</button>
+                        <input type="text" name='link' placeholder='Enter Link Here'>
+                        <input type="hidden" value={{g.token}} name='token'>
+                        <input type="hidden" name='ticker' value={{stockName}}>
+                        <input type="hidden" value={{listname}} name='listname'>
+                    </form>
+                    {% if bookmarks|length > 0 %}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+    <form action="{{url_for('profile.dList')}}" method='POST'>
+        <input type="hidden" value={{g.token}} name='token'>
+        <input type="hidden" value={{listname}} name='listname'>
+        <button type='submit'>Delete List</button>
+    </form>
+    </div>
+    {% endfor %}
+{% else %}
+    <div>No lists</div>
+{% endif %}
+</div>
+</div>
+{% endblock %}

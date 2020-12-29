@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8"/>
+    <title>My Web Page</title>
+    <style type="text/css">
+        body{
+            width: 760px; /* how wide to make your web page */
+            background-color: rgb(0, 85, 85); /* what color to make the background */
+            margin: 0 auto;
+            padding: 0;
+            font:12px/16px Verdana, sans-serif; /* default font */
+        }
+        div#main{
+            background-color: rgb(247, 192, 192);
+            margin: 0;
+            padding: 10px;
+        }
+        .weather{
+            width: 200px;
+            border: 1px solid black;
+            padding: 5px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .weather-loc{
+            font-size: 18px;
+        }
+
+        .weather-temp{
+            float:left;
+        }
+        .weather-temp::before{
+            content: 'Currently ';
+        }
+
+        .weather-humidity{
+            float: right;
+        }
+        .weather-humidity::before{
+            content: 'Humidity: ';
+        }
+        .weather-humidity::after{
+            content: '%';
+        }
+    </style>
+</head>
+<body><div id="main">
+    <div class="weather" id="weatherWidget">
+        
+        <div class="weather-loc" id="weather-loc"></div>
+        <div class="weather-humidity" id="weather-humidity"></div>
+        <div class="weather-temp" id="weather-temp"></div>
+        <img class="weather-tomorrow" id="weather-tomorrow" />
+        <img class="weather-dayaftertomorrow" id="weather-dayaftertomorrow" />
+    </div>
+    <p>
+        <button id="refreshButton">Refresh</button>
+    </p>
+
+</div></body>
+<script src='weather.js'></script>
+</html>

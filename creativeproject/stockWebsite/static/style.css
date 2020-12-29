@@ -1,0 +1,73 @@
+.cRed{
+    color: red !important;
+    border-color:  rgb(185, 185, 185);
+}
+.cGreen{
+    color: rgb(0, 170, 0) !important;
+    border-color:  rgb(185, 185, 185);
+}
+body{
+    background-color: rgb(56, 56, 56) !important;
+    color: rgb(185, 185, 185) !important;
+}
+.inline {
+    display: flex;
+    align-items: flex-start;
+}
+.inline > div {
+    margin: 0 3px;
+}
+a,a:hover{
+    color: lightblue;
+    text-decoration: none;
+}
+.hide {
+    display:none;
+}
+table, th, td, table>th,td{
+    border: 1px solid;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border-collapse: collapse;
+}
+nav {
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
+}
+nav h1 {
+    flex: auto;
+}
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: flex-end;
+}
+nav ul li a, nav ul li span, header {
+    display: block;
+    padding: 0.5rem;
+}
+#noBorder, #noBorder th, #noBorder td{
+    border: none;
+}
+select {
+    width:100%;
+}
+#order{
+    width:61%;
+}
+#asce{
+    width:37%;
+}
+.center{
+    text-align: center;
+}
+.smaller {
+    margin:0;
+    padding:0;
+}
+.default{
+    width:auto;
+}

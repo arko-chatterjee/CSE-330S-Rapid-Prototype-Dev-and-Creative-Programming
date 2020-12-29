@@ -1,0 +1,272 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Screen Stocks{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form method='POST'>
+        <label for="tickerSearch">Stock Symbol</label>
+        <input type="text" name='tickerSearch' id='tickerSearch' aria-label="stock ticker searchbox" placeholder="Type Ticker(s) in Here" value="{{tck}}"><br>
+        <table id='noBorder'>
+        <tbody>
+        <tr>
+        <td>
+        <label for='indexes'>Index</label>
+        </td>
+        <td>
+        <select name='indexes' id='indexes'>
+            <option value="any">Any</option>
+            <option value="idx_dji"{% if args['idx']=="idx_dji" %} selected {% endif %}>Dow Jones Industrial Average</option>
+            <option value="idx_sp500"{% if args['idx']=="idx_sp500" %} selected {% endif %}>S&P 500</option>
+        </select>
+        </td>
+        <td>
+        <label for='mcap'>Market Cap</label>
+        </td>
+        <td>
+        <select name="mcap" id="mcap">
+            <option value="any">Any</option>
+            <option value="cap_mega"{% if args['cap']=="cap_mega" %} selected {% endif %}>$200bil and more</option>
+            <option value="cap_mid"{% if args['cap']=="cap_mid" %} selected {% endif %}>$10bil to $200bil</option>
+            <option value="cap_small"{% if args['cap']=="cap_small" %} selected {% endif %}>$2bil to $10bil</option>
+            <option value="cap_micro"{% if args['cap']=="cap_micro" %} selected {% endif %}>$300mil to $2bil</option>
+            <option value="cap_nano"{% if args['cap']=="cap_nano" %} selected {% endif %}>Under $50mil</option>
+            <option value="cap_largeover"{% if args['cap']=="cap_largeover" %} selected {% endif %}>Over $10bil</option>
+            <option value="cap_midover"{% if args['cap']=="cap_midover" %} selected {% endif %}>Over $2bil</option>
+            <option value="cap_smallover"{% if args['cap']=="cap_smallover" %} selected {% endif %}>Over $300mil</option>
+            <option value="cap_microover"{% if args['cap']=="cap_microover" %} selected {% endif %}>Over $50mil</option>
+            <option value="cap_largeunder"{% if args['cap']=="cap_largeunder" %} selected {% endif %}>Under $200bil</option>
+            <option value="cap_midunder"{% if args['cap']=="cap_midunder" %} selected {% endif %}>Under $10bil</option>
+            <option value="cap_smallunder"{% if args['cap']=="cap_smallunder" %} selected {% endif %}>Under $2bil</option>
+            <option value="cap_microunder"{% if args['cap']=="cap_microunder" %} selected {% endif %}>Under $300mil</option>
+        </select>
+        </td>
+        <td>
+        <label for="price">Price</label>
+        </td>
+        <td>
+        <select name="price" id="price">
+            <option value="any">Any</option>
+            <option value="sh_price_u1"{% if args['price']=="sh_price_u1" %} selected {% endif %}>Under $1</option>
+            <option value="sh_price_u2"{% if args['price']=="sh_price_u2" %} selected {% endif %}>Under $2</option>
+            <option value="sh_price_u3"{% if args['price']=="sh_price_u3" %} selected {% endif %}>Under $3</option>
+            <option value="sh_price_u4"{% if args['price']=="sh_price_u4" %} selected {% endif %}>Under $4</option>
+            <option value="sh_price_u5"{% if args['price']=="sh_price_u5" %} selected {% endif %}>Under $5</option>
+            <option value="sh_price_u7"{% if args['price']=="sh_price_u7" %} selected {% endif %}>Under $7</option>
+            <option value="sh_price_u10"{% if args['price']=="sh_price_u10" %} selected {% endif %}>Under $10</option>
+            <option value="sh_price_u15"{% if args['price']=="sh_price_u15" %} selected {% endif %}>Under $15</option>
+            <option value="sh_price_u20"{% if args['price']=="sh_price_u20" %} selected {% endif %}>Under $20</option>
+            <option value="sh_price_u30"{% if args['price']=="sh_price_u30" %} selected {% endif %}>Under $30</option>
+            <option value="sh_price_u40"{% if args['price']=="sh_price_u40" %} selected {% endif %}>Under $40</option>
+            <option value="sh_price_u50"{% if args['price']=="sh_price_u50" %} selected {% endif %}>Under $50</option>
+            <option value="sh_price_o1"{% if args['price']=="sh_price_o1" %} selected {% endif %}>Over $1</option>
+            <option value="sh_price_o2"{% if args['price']=="sh_price_o2" %} selected {% endif %}>Over $2</option>
+            <option value="sh_price_o3"{% if args['price']=="sh_price_o3" %} selected {% endif %}>Over $3</option>
+            <option value="sh_price_o4"{% if args['price']=="sh_price_o4" %} selected {% endif %}>Over $4</option>
+            <option value="sh_price_o5"{% if args['price']=="sh_price_o5" %} selected {% endif %}>Over $5</option>
+            <option value="sh_price_o7"{% if args['price']=="sh_price_o7" %} selected {% endif %}>Over $7</option>
+            <option value="sh_price_o10"{% if args['price']=="sh_price_o10" %} selected {% endif %}>Over $10</option>
+            <option value="sh_price_o15"{% if args['price']=="sh_price_o15" %} selected {% endif %}>Over $15</option>
+            <option value="sh_price_o20"{% if args['price']=="sh_price_o20" %} selected {% endif %}>Over $20</option>
+            <option value="sh_price_o30"{% if args['price']=="sh_price_o30" %} selected {% endif %}>Over $30</option>
+            <option value="sh_price_o40"{% if args['price']=="sh_price_o40" %} selected {% endif %}>Over $40</option>
+            <option value="sh_price_o50"{% if args['price']=="sh_price_o50" %} selected {% endif %}>Over $50</option>
+            <option value="sh_price_o60"{% if args['price']=="sh_price_o60" %} selected {% endif %}>Over $60</option>
+            <option value="sh_price_o70"{% if args['price']=="sh_price_o70" %} selected {% endif %}>Over $70</option>
+            <option value="sh_price_o80"{% if args['price']=="sh_price_o80" %} selected {% endif %}>Over $80</option>
+            <option value="sh_price_o90"{% if args['price']=="sh_price_o90" %} selected {% endif %}>Over $90</option>
+            <option value="sh_price_o100"{% if args['price']=="sh_price_o100" %} selected {% endif %}>Over $100</option>
+            <option value="sh_price_1to5"{% if args['price']=="sh_price_1to5" %} selected {% endif %}>$1 to $5</option>
+            <option value="sh_price_1to10"{% if args['price']=="sh_price_1to10" %} selected {% endif %}>$1 to $10</option>
+            <option value="sh_price_1to20"{% if args['price']=="sh_price_1to20" %} selected {% endif %}>$1 to $20</option>
+            <option value="sh_price_5to10"{% if args['price']=="sh_price_5to10" %} selected {% endif %}>$5 to $10</option>
+            <option value="sh_price_5to20"{% if args['price']=="sh_price_5to20" %} selected {% endif %}>$5 to $20</option>
+            <option value="sh_price_5to50"{% if args['price']=="sh_price_5to50" %} selected {% endif %}>$5 to $50</option>
+            <option value="sh_price_10to20"{% if args['price']=="sh_price_10to20" %} selected {% endif %}>$10 to $20</option>
+            <option value="sh_price_10to50"{% if args['price']=="sh_price_10to50" %} selected {% endif %}>$10 to $50</option>
+            <option value="sh_price_20to50"{% if args['price']=="sh_price_20to50" %} selected {% endif %}>$20 to $50</option>
+            <option value="sh_price_50to100"{% if args['price']=="sh_price_50to100" %} selected {% endif %}>$50 to $100</option>
+        </select>
+        </td>
+        </tr>
+        <tr>
+        <td>
+        <label for="avVol">Average Volume</label>
+        </td>
+        <td>
+        <select name="avVol" id="avVol">
+            <option value="any">Any</option>
+            <option value="sh_avgvol_u50"{% if args['avvol']=="sh_avgvol_u50" %} selected {% endif %}>Under 50k</option>
+            <option value="sh_avgvol_u100"{% if args['avvol']=="sh_avgvol_u100" %} selected {% endif %}>Under 100k</option>
+            <option value="sh_avgvol_u500"{% if args['avvol']=="sh_avgvol_u500" %} selected {% endif %}>Under 500k</option>
+            <option value="sh_avgvol_u750"{% if args['avvol']=="sh_avgvol_u750" %} selected {% endif %}>Under 750k</option>
+            <option value="sh_avgvol_u1000"{% if args['avvol']=="sh_avgvol_u1000" %} selected {% endif %}>Under 1M</option>
+            <option value="sh_avgvol_o50"{% if args['avvol']=="sh_avgvol_o50" %} selected {% endif %}>Over 50k</option>
+            <option value="sh_avgvol_o100"{% if args['avvol']=="sh_avgvol_o100" %} selected {% endif %}>Over 100k</option>
+            <option value="sh_avgvol_o200"{% if args['avvol']=="sh_avgvol_o200" %} selected {% endif %}>Over 200k</option>
+            <option value="sh_avgvol_o300"{% if args['avvol']=="sh_avgvol_o300" %} selected {% endif %}>Over 300k</option>
+            <option value="sh_avgvol_o400"{% if args['avvol']=="sh_avgvol_o400" %} selected {% endif %}>Over 400k</option>
+            <option value="sh_avgvol_o500"{% if args['avvol']=="sh_avgvol_o500" %} selected {% endif %}>Over 500k</option>
+            <option value="sh_avgvol_o750"{% if args['avvol']=="sh_avgvol_o750" %} selected {% endif %}>Over 750k</option>
+            <option value="sh_avgvol_o1000"{% if args['avvol']=="sh_avgvol_o1000" %} selected {% endif %}>Over 1M</option>
+            <option value="sh_avgvol_o2000"{% if args['avvol']=="sh_avgvol_o2000" %} selected {% endif %}>Over 2M</option>
+            <option value="sh_avgvol_100to500"{% if args['avvol']=="sh_avgvol_100to500" %} selected {% endif %}>100k to 500k</option>
+            <option value="sh_avgvol_100to1000"{% if args['avvol']=="sh_avgvol_100to1000" %} selected {% endif %}>100k to 1M</option>
+            <option value="sh_avgvol_500to1000"{% if args['avvol']=="sh_avgvol_500to1000" %} selected {% endif %}>500k to 1M</option>
+            <option value="sh_avgvol_500to10000"{% if args['avvol']=="sh_avgvol_500to10000" %} selected {% endif %}>500k to 10M</option>
+        </select>
+        </td>
+        <td>
+        <label for="shareOutstand">Shares Outstanding</label>
+        </td>
+        <td>
+        <select name="shareOutstand" id="shareOutstand">
+            <option value="any">Any</option>
+            <option value="sh_outstanding_u1"{% if args['outstand']=="sh_outstanding_u1" %} selected {% endif %}>Under 1M</option>
+            <option value="sh_outstanding_u5"{% if args['outstand']=="sh_outstanding_u5" %} selected {% endif %}>Under 5M</option>
+            <option value="sh_outstanding_u10"{% if args['outstand']=="sh_outstanding_u10" %} selected {% endif %}>Under 10M</option>
+            <option value="sh_outstanding_u20"{% if args['outstand']=="sh_outstanding_u20" %} selected {% endif %}>Under 20M</option>
+            <option value="sh_outstanding_u50"{% if args['outstand']=="sh_outstanding_u50" %} selected {% endif %}>Under 50M</option>
+            <option value="sh_outstanding_u100"{% if args['outstand']=="sh_outstanding_u100" %} selected {% endif %}>Under 100M</option>
+            <option value="sh_outstanding_o1"{% if args['outstand']=="sh_outstanding_o1" %} selected {% endif %}>Over 1M</option>
+            <option value="sh_outstanding_o2"{% if args['outstand']=="sh_outstanding_o2" %} selected {% endif %}>Over 2M</option>
+            <option value="sh_outstanding_o5"{% if args['outstand']=="sh_outstanding_o5" %} selected {% endif %}>Over 5M</option>
+            <option value="sh_outstanding_o10"{% if args['outstand']=="sh_outstanding_o10" %} selected {% endif %}>Over 10M</option>
+            <option value="sh_outstanding_o20"{% if args['outstand']=="sh_outstanding_o20" %} selected {% endif %}>Over 20M</option>
+            <option value="sh_outstanding_o50"{% if args['outstand']=="sh_outstanding_o50" %} selected {% endif %}>Over 50M</option>
+            <option value="sh_outstanding_o100"{% if args['outstand']=="sh_outstanding_o100" %} selected {% endif %}>Over 100M</option>
+            <option value="sh_outstanding_o200"{% if args['outstand']=="sh_outstanding_o200" %} selected {% endif %}>Over 200M</option>
+            <option value="sh_outstanding_o500"{% if args['outstand']=="sh_outstanding_o500" %} selected {% endif %}>Over 500M</option>
+            <option value="sh_outstanding_o1000"{% if args['outstand']=="sh_outstanding_o1000" %} selected {% endif %}>Over 1000M</option>
+        </select>
+        </td>
+        <td>
+        <label for="sma20">20-Day Simple Moving Average</label>
+        </td>
+        <td>
+        <select name="sma20" id="sma20">
+            <option value="any">Any</option>
+            <option value="ta_sma20_pb"{% if args['sm20']=="ta_sma20_pb" %} selected {% endif %}>Price Below 20-Day SMA</option>
+            <option value="ta_sma20_pa"{% if args['sm20']=="ta_sma20_pa" %} selected {% endif %}>Price Above 20-Day SMA</option>
+            <option value="ta_sma20_pc"{% if args['sm20']=="ta_sma20_pc" %} selected {% endif %}>Price Crossed 20-Day SMA</option>
+            <option value="ta_sma20_pcb"{% if args['sm20']=="ta_sma20_pcb" %} selected {% endif %}>Price Crossed Below 20-Day SMA</option>
+            <option value="ta_sma20_pca"{% if args['sm20']=="ta_sma20_pca" %} selected {% endif %}>Price Crossed Above 20-Day SMA</option>
+            <option value="ta_sma20_sb50"{% if args['sm20']=="ta_sma20_sb50" %} selected {% endif %}>20 Day SMA below 50 Day SMA</option>
+            <option value="ta_sma20_sa50"{% if args['sm20']=="ta_sma20_sa50" %} selected {% endif %}>20 Day SMA above 50 Day SMA</option>
+            <option value="ta_sma20_sb200"{% if args['sm20']=="ta_sma20_sb200" %} selected {% endif %}>20 Day SMA below 200 Day SMA</option>
+            <option value="ta_sma20_sa200"{% if args['sm20']=="ta_sma20_sa200" %} selected {% endif %}>20 Day SMA above 200 Day SMA</option>
+        </select>
+        </td>
+        </tr>
+        <tr>
+        <td>
+        <label for="sma50">50-Day Simple Moving Average</label>
+        </td>
+        <td>
+        <select name="sma50" id="sma50">
+            <option value="any">Any</option>
+            <option value="ta_sma50_pb"{% if args['sm50']=="ta_sma50_pb" %} selected {% endif %}>Price Below 50-Day SMA</option>
+            <option value="ta_sma50_pa"{% if args['sm50']=="ta_sma50_pa" %} selected {% endif %}>Price Above 50-Day SMA</option>
+            <option value="ta_sma50_pc"{% if args['sm50']=="ta_sma50_pc" %} selected {% endif %}>Price Crossed 50-Day SMA</option>
+            <option value="ta_sma50_pcb"{% if args['sm50']=="ta_sma50_pcb" %} selected {% endif %}>Price Crossed Below 50-Day SMA</option>
+            <option value="ta_sma50_pca"{% if args['sm50']=="ta_sma50_pca" %} selected {% endif %}>Price Crossed Above 50-Day SMA</option>
+            <option value="ta_sma50_sb20"{% if args['sm50']=="ta_sma50_sb20" %} selected {% endif %}>50 Day SMA below 20 Day SMA</option>
+            <option value="ta_sma50_sa20"{% if args['sm50']=="ta_sma50_sa20" %} selected {% endif %}>50 Day SMA above 20 Day SMA</option>
+            <option value="ta_sma50_sb200"{% if args['sm50']=="ta_sma50_sb200" %} selected {% endif %}>50 Day SMA below 200 Day SMA</option>
+            <option value="ta_sma50_sa200"{% if args['sm50']=="ta_sma50_sa200" %} selected {% endif %}>50 Day SMA above 200 Day SMA</option>
+        </select>
+        </td>
+        <td>
+        <label for="sma200">200-Day Simple Moving Average</label>
+        </td>
+        <td>
+        <select name="sma200" id="sma200">
+            <option value="any">Any</option>
+            <option value="ta_sma200_pb"{% if args['sm200']=="ta_sma200_pb" %} selected {% endif %}>Price Below 200-Day SMA</option>
+            <option value="ta_sma200_pa"{% if args['sm200']=="ta_sma200_pa" %} selected {% endif %}>Price Above 200-Day SMA</option>
+            <option value="ta_sma200_pc"{% if args['sm200']=="ta_sma200_pc" %} selected {% endif %}>Price Crossed 200-Day SMA</option>
+            <option value="ta_sma200_pcb"{% if args['sm200']=="ta_sma200_pcb" %} selected {% endif %}>Price Crossed Below 200-Day SMA</option>
+            <option value="ta_sma200_pca"{% if args['sm200']=="ta_sma200_pca" %} selected {% endif %}>Price Crossed Above 200-Day SMA</option>
+            <option value="ta_sma200_sb20"{% if args['sm200']=="ta_sma200_sb20" %} selected {% endif %}>200 Day SMA below 20 Day SMA</option>
+            <option value="ta_sma200_sa20"{% if args['sm200']=="ta_sma200_sa20" %} selected {% endif %}>200 Day SMA above 20 Day SMA</option>
+            <option value="ta_sma200_sb50"{% if args['sm200']=="ta_sma200_sb50" %} selected {% endif %}>200 Day SMA below 50 Day SMA</option>
+            <option value="ta_sma200_sa50"{% if args['sm200']=="ta_sma200_sa50" %} selected {% endif %}>200 Day SMA above 50 Day SMA</option>
+        </select>
+        </td>
+        <td>
+        <label for="order">Order</label>
+        </td>
+        <td>
+        <select name="order" id="order">
+            <option value="ticker" {% if ord == 'ticker' %} selected {% endif %}>Ticker</option>
+            <option value="company" {% if ord == 'company' %} selected {% endif %}>Company</option>
+            <option value="pe" {% if ord == 'pe' %} selected {% endif %}>Price/Earnings</option>
+            <option value="dividendyield" {% if ord == 'dividendyield' %} selected {% endif %}>Dividend Yield</option>
+            <option value="roi" {% if ord == 'roi' %} selected {% endif %}>Return on Investment</option>
+            <option value="netmargin" {% if ord == 'netmargin' %} selected {% endif %}>Net Profit Margin</option>
+            <option value="change" {% if ord == 'change' %} selected {% endif %}>Change</option>
+            <option value="price" {% if ord == 'price' %} selected {% endif %}>Price</option>
+            <option value="debteq" {% if ord == 'debteq' %} selected {% endif %}>Total Debt/Equity</option>
+        </select>
+        <select name="asce" id="asce">
+            <option value="asce">Ascending</option>
+            <option value="desc"{% if args['asce']=="desc" %} selected {% endif %}>Descending</option>
+        </select>
+        </td>
+        </tr>
+        <input type="hidden" name='page' value={{args['page'] if args['page'] is defined else '1'}}>
+        <input type='submit' value='Search' name='search'>
+        <input type="submit" value='Reset' name='reset'>
+        </tbody>
+    </table>
+    </form>
+    {% if column_names is defined and column_names[0] is defined %}
+    <table> <!-- This template element is based on https://stackoverflow.com/a/56296451-->
+        <thead>
+            <tr>
+                {% for col in column_names %}
+                <th>{{col}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in row_data %}
+            <tr>
+                {% for col, row_ in zip(column_names, row) %}
+                {% if col == link_column %}
+                <td>
+                    <a href="{{row_}}"  class='ticker_links'>
+                        {{ row_ }}
+                    </a>
+                </td>
+                {% else %}
+                    {% if '%' in row_ %}
+                        {% if '-' in row_ %}
+                        <td class='cRed'>{{row_}}</td>
+                        {% else %}
+                        <td class='cGreen'>{{row_}}</td>
+                        {% endif %}
+                    {% else %}
+                    <td>{{row_}}</td>
+                    {% endif %}
+                {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    
+    </table>
+    <form action="{{url_for('screen.download')}}" method='POST' target='_blank'>
+        <button type='submit'>Download Results</button>
+        {% for key in args %}
+        <input type="hidden" name='{{key}}' value='{{args[key]}}'>
+        {% endfor %}
+        <input type="hidden" name='ticker' value='{{tck}}'>
+        <input type="hidden" name='order' value='{{ord}}'>
+    </form>
+    
+    {% else %}
+    <div><h2>No Results Found</h2></div>
+    {% endif %}
+{% endblock %}

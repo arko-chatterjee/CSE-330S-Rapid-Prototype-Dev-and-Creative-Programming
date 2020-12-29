@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap');
+    body{
+        background:linear-gradient(29deg, lightblue, blue, azure);
+    }
+    .topBanner{
+        position:fixed;
+        top:0px;
+        right:0;
+        left:0;
+        text-align: right;
+        background:radial-gradient(white,red,orange);
+        border-bottom-color: magenta;
+        border-bottom-width:2px;
+        border-top:0px;
+        border-right:0px;
+        border-left:0px;
+        border-top-color:white;
+        border-style:solid;
+
+    }
+    .initial{
+        background-color: rgb(33,2,123);
+        color: teal;
+        text-align:center;
+        border-radius:35%;
+        font-family: 'Comic Neue', serif;
+    }
+    .PogU{
+        text-align: center;
+        border-color: limegreen;
+        border-width: 10px;
+        border-style:dashed;
+        border-radius: 15%;
+    }
+    h1{
+        transform:translateY(12px);
+        font-size:56px;
+    }
+    .bold{
+        font-weight: bold;
+    }
+    #inspire{
+        font-family:monospace;
+        color:#fff;
+        text-shadow: rgb(172, 43, 43) 0.5px 0px 5px;
+        text-align: right;
+    }
+    .popper{
+        margin-top: -150px;
+        transform: scaleX(0.75) scaleY(0.75);
+        display: inline-block;
+    }
+    .flip{
+        transform:scaleX(-0.75) scaleY(0.75);
+    }
+    p{
+        color: #ff00dd;
+    }
+    #almostBottom{
+        text-align: center;
+        color: coral;
+        text-emphasis-color: lime;        
+    }

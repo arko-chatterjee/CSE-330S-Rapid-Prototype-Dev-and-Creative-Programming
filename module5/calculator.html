@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset="utf-8"/>
+    <title>JavaScript Calculator</title>
+    <style>
+        body {
+            background-color: rgb(40,40,41);
+            color: lightgray;
+        }
+        .inline{
+            display: inline-flex;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <div>
+        <form name='calculateForm' method='post'>
+            <label> First number: <input id ='n1' type='text' name='n1'/></label><br>
+            Operator: 
+            <input id='plus' type='radio' name='math' value='+' >+
+            <input id='minus' type='radio' name='math' value='-' >-
+            <input id='mult' type='radio' name='math' value='*' >*
+            <input id='div' type='radio' name='math' value='/' >/<br>
+            <label> Second number: <input id ='n2' type ='text' name='n2'/></label><br>
+        </form>
+    </div>
+    <div class='inline'><p>Result:&nbsp;</p><p id='out'></p></div>
+    
+</body>
+<script src='calculator.js'>
+</script>
+</html>
